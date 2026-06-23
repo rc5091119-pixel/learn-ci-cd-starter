@@ -21,3 +21,14 @@ func GetAPIKey(headers http.Header) (string, error) {
 
 	return splitAuth[1], nil
 }
+
+func Split(s, sep string) []string {
+	var result []string
+	i := strings.Index(s, sep)
+	for i > -1 {
+		result = append(result, s[:i])
+		s = s[i+len(sep):]
+		i = strings.Index(s, sep)
+	}
+	return append(result, s)
+}
