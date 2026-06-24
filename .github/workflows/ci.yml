@@ -20,6 +20,12 @@ jobs:
 
       - name: Force Failure
         run: go test -cover ./...
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest\
+      - name: goseccheck
+        run: gosec ./...
+
+
   style:
     name: Style
     runs-on: ubuntu-latest
@@ -32,5 +38,11 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: "1.26.0"
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
       - name: Style check
         run: test -z $(go fmt ./...)
+      - name: staticcheck
+        run: staticcheck ./...
+       
